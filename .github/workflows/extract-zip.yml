@@ -1,0 +1,53 @@
+name: Extract supplier agent ZIP
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract ZIP
+        run: |
+          python - <<'PY'
+          import zipfile
+          from pathlib import Path
+
+          archive = Path("supplier-agent-pro.zip")
+          if not archive.exists():
+              raise SystemExit("ZIP file not found")
+
+          with zipfile.ZipFile(archive) as z:
+              files = [n for n in z.namelist() if not n.endswith("/")]
+              roots = {n.split("/")[0] for n in files if "/" in n}
+              strip_root = len(roots) == 1 and all(
+                  n.startswith(next(iter(roots)) + "/") for n in files
+              )
+              root = next(iter(roots)) if strip_root else None
+
+              for name in files:
+                  parts = Path(name).parts
+                  if root and parts[0] == root:
+                      parts = parts[1:]
+                  if not parts or ".." in parts:
+                      continue
+                  target = Path(*parts)
+                  if target == archive or target == Path(".github/workflows/extract-zip.yml"):
+                      continue
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  target.write_bytes(z.read(name))
+          PY
+
+      - name: Commit extracted files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --cached --quiet || git commit -m "Extract supplier agent project"
+          git push
