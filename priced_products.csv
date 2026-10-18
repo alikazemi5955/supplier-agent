@@ -1,0 +1,5 @@
+﻿supplier,supplier_sku,title,brand,model,color,price,currency,stock,product_url,sale_price,review_status,review_note,match_candidate_group
+Supplier A,A-100,کفش مدل X200,ExampleBrand,X200,مشکی,980000.0,IRR,12,https://example.com/item-a,1029000,needs_match_review,برند/مدل مشابه در چند ردیف دیده شد؛ ادغام خودکار انجام نشده است.,examplebrand:x200
+Supplier B,B-200,کفش X-200,ExampleBrand,X200,سفید,1020000.0,IRR,5,https://example.com/item-b,1071000,needs_match_review,برند/مدل مشابه در چند ردیف دیده شد؛ ادغام خودکار انجام نشده است.,examplebrand:x200
+Supplier A,A-300,تی‌شرت ساده,TeeBrand,T100,آبی,250000.0,IRR,20,https://example.com/item-c,262500,ready_for_manual_review,قیمت محاسبه شد؛ انتشار خودکار غیرفعال است.,teebrand:t100
+Supplier C,C-400,کفش مدل X200,ExampleBrand,X200,مشکی,950000.0,IRR,0,https://example.com/item-d,997500,blocked_out_of_stock,موجودی صفر است؛ پیش از انتشار بررسی شود.,examplebrand:x200

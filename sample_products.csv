@@ -1,0 +1,5 @@
+supplier,supplier_sku,title,brand,model,color,price,currency,stock,product_url
+Supplier A,A-100,کفش مدل X200,ExampleBrand,X200,مشکی,980000,IRR,12,https://example.com/item-a
+Supplier B,B-200,کفش X-200,ExampleBrand,X200,سفید,1020000,IRR,5,https://example.com/item-b
+Supplier A,A-300,تی‌شرت ساده,TeeBrand,T100,آبی,250000,IRR,20,https://example.com/item-c
+Supplier C,C-400,کفش مدل X200,ExampleBrand,X200,مشکی,950000,IRR,0,https://example.com/item-d

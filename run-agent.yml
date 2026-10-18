@@ -1,0 +1,34 @@
+name: Run supplier agent
+on:
+  workflow_dispatch:
+    inputs:
+      markup_percent:
+        description: "Price increase percentage"
+        required: true
+        default: "5"
+        type: string
+permissions:
+  contents: read
+jobs:
+  build-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+      - run: pip install -r requirements.txt
+      - name: Run tests
+        run: pytest -q
+      - name: Generate report
+        env:
+          MARKUP_PERCENT: ${{ inputs.markup_percent || '5' }}
+        run: python main.py --input data/sample_products.csv --output output/priced_products.csv --markup "$MARKUP_PERCENT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: supplier-agent-report
+          path: output/priced_products.csv
+          if-no-files-found: error
+          retention-days: 14

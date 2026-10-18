@@ -1,0 +1,9 @@
+[
+  "tests/test_pricing.py::test_five_percent",
+  "tests/test_pricing.py::test_reject_invalid[-1-5]",
+  "tests/test_pricing.py::test_reject_invalid[100--1]",
+  "tests/test_pricing.py::test_reject_invalid[abc-5]",
+  "tests/test_pricing.py::test_round_half_up",
+  "tests/test_report.py::test_sample_loads",
+  "tests/test_report.py::test_zero_stock_blocked"
+]
